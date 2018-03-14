@@ -1,7 +1,7 @@
-%p#notice= notice
-%p
-  %strong Name:
-  = @team.name
-= link_to 'Edit', edit_team_path(@team)
-|
-= link_to 'Back', teams_path
+.container
+  %p
+    %strong Name:
+    = @team.name
+  = link_to 'Edit', edit_team_path(@team), class: 'btn btn-info'
+  |
+  = link_to 'Back', teams_path, class: 'btn btn-info'

@@ -6,6 +6,8 @@ class Team < ApplicationRecord
 
   validates :name, uniqueness: true, presence: true
 
+  mount_uploader :image, ImageUploader
+
   # def set_cap
   #   TeamMember.create
   # end

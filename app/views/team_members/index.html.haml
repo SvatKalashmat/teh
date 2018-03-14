@@ -1,20 +1,19 @@
-%p#notice= notice
-%h1 Team Members
-%table
-  %thead
-    %tr
-      %th Role
-      %th Team
-      %th User
-      %th{:colspan => "3"}
-  %tbody
-    - @team_members.each do |team_member|
+.container
+  %h2 Team Members #{link_to 'New Team Member', new_team_team_member_path(user_id: current_user.id), class: 'btn btn-success'}
+  %table
+    %thead
       %tr
-        %td= team_member.role
-        %td= team_member.team_id
-        %td= team_member.user_id
-        %td= link_to 'Show', team_member
-        %td= link_to 'Edit', edit_team_member_path(team_member)
-        %td= link_to 'Destroy', team_member, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Team Member', new_team_team_member_path(user_id: current_user.id)
+        %th Role
+        %th Team
+        %th User
+        %th{:colspan => "3"}
+    %tbody
+      - @team_members.each do |team_member|
+        %tr
+          %td= team_member.role
+          %td= team_member.team_id
+          %td= team_member.user_id
+          %td= link_to 'Show', team_member
+          %td= link_to 'Edit', edit_team_member_path(team_member)
+          %td= link_to 'Destroy', team_member, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/

@@ -14,3 +14,20 @@
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+
+//111 вынести и зарекваерить
+.img_value {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100px;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}

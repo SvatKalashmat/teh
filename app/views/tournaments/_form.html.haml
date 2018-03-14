@@ -1,14 +1,4 @@
-= form_for(tournament) do |f|
-  - if tournament.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(tournament.errors.count, "error")
-        prohibited this tournament from being saved:
-      %ul
-        - tournament.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit
+= simple_form_for tournament do |f|
+  = f.input :name
+  .form-group
+    = f.button :submit, class: 'btn btn-success'

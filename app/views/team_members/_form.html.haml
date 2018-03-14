@@ -1,12 +1,4 @@
 = form_for(team_team_members_path) do |f|
-  - if team_member.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(team_member.errors.count, "error")
-        prohibited this team_member from being saved:
-      %ul
-        - team_member.errors.full_messages.each do |message|
-          %li= message
   .field
     = f.label :role
     = f.number_field :role

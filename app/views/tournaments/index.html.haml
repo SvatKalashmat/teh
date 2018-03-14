@@ -1,16 +1,21 @@
-%p#notice= notice
-%h1 Tournaments
-%table
-  %thead
-    %tr
-      %th Name
-      %th{:colspan => "3"}
-  %tbody
-    - @tournaments.each do |tournament|
+.container
+  %h2 Tournaments #{link_to 'New Tournament', new_tournament_path, class: 'btn btn-success' if user_signed_in?}
+  %table.table.table-hover
+    %thead
       %tr
-        %td= tournament.name
-        %td= link_to 'Show', tournament
-        %td= link_to 'Edit', edit_tournament_path(tournament)
-        %td= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Tournament', new_tournament_path
+        %th Name
+        %th Registred players
+        %th Playrуs
+        %th Status
+        %th Menu
+    %tbody
+      %tbody
+        - @tournaments.each do |tournament|
+          %tr
+            %td= tournament.name
+            %td зареганые участники
+            %td= link_to 'Participants', tournament_tournament_members_path(tournament), class: 'btn btn-warning'
+            %td= link_to 'СобытиеСобытиеСобытиеСобытие', new_team_path, class: 'btn btn-primary btn-block'
+            %td
+              = link_to 'Edit', edit_tournament_path(tournament), class: 'btn btn-primary'
+              = link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

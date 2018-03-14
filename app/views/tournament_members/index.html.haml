@@ -1,18 +1,22 @@
-%p#notice= notice
-%h1 Tournament Members
-%table
-  %thead
-    %tr
-      %th Team
-      %th Tournament
-      %th{:colspan => "3"}
-  %tbody
-    - @tournament_members.each do |tournament_member|
+.container
+  %h2 Tournament Members
+  %table
+    %thead
       %tr
-        %td= tournament_member.team_id
-        %td= tournament_member.tournament_id
-        %td= link_to 'Show', tournament_member
-        %td= link_to 'Edit', edit_tournament_member_path(tournament_member)
-        %td= link_to 'Destroy', tournament_member, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Tournament Member', new_tournament_member_path
+        %th Avatar
+        %th Team name
+        %th Captain Nick
+        %th Register Time
+        %th{:colspan => "3"}
+    %tbody
+      - @tournament_members.each do |tournament_member|
+        %tr
+          %td тут будет авка
+          %td название команды
+          %td ник капитана
+          %td дата регистрации
+          %td= link_to 'Show', tournament_member
+          %td= link_to 'Edit', edit_tournament_member_path(tournament_member)
+          %td= link_to 'Destroy', tournament_member, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  = link_to 'New Tournament Member', new_tournament_tournament_member_path
