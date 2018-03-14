@@ -15,7 +15,8 @@
             %td= tournament.name
             %td зареганые участники
             %td= link_to 'Participants', tournament_tournament_members_path(tournament), class: 'btn btn-warning'
-            %td= link_to 'СобытиеСобытиеСобытиеСобытие', new_team_path, class: 'btn btn-primary btn-block'
+            %td= link_to 'СобытиеСобытиеСобытиеСобытие', tournament_tournament_members_path(tournament), action: :create, method: :post, class: 'btn btn-success'
             %td
               = link_to 'Edit', edit_tournament_path(tournament), class: 'btn btn-primary'
-              = link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+              = link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger delete_staff',
+                :remote => true

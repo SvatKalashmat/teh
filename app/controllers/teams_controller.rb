@@ -26,7 +26,7 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-
+    @team.team_members.build(user_id: current_user.id, role: TeamMember.roles[:owner])
     respond_to do |format|
       if @team.save
         format.html { redirect_to teams_path, notice: 'Team was successfully created.' }

@@ -6,9 +6,7 @@ Rails.application.routes.draw do
     resources :tournament_members
   end
   resources :teams do
-    resources :team_members do
-      resources :users
-    end
+    resources :team_members
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

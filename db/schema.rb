@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314023002) do
+ActiveRecord::Schema.define(version: 20180314132223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180314023002) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "image"
@@ -33,14 +33,15 @@ ActiveRecord::Schema.define(version: 20180314023002) do
   end
 
   create_table "tournament_members", force: :cascade do |t|
-    t.integer  "team_id"
-    t.integer  "tournament_id"
+    t.integer  "team_id",       null: false
+    t.integer  "tournament_id", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["team_id", "tournament_id"], name: "index_tournament_members_on_team_id_and_tournament_id", unique: true, using: :btree
   end
 
   create_table "tournaments", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_tournaments_on_name", unique: true, using: :btree
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180314023002) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "nick",                   default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

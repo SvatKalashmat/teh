@@ -1,5 +1,5 @@
 .container
-  %h2 Team Members #{link_to 'New Team Member', new_team_team_member_path(user_id: current_user.id), class: 'btn btn-success'}
+  %h2 Team Members #{link_to 'New Team Member', team_team_members_path, action: :create, method: :post, class: 'btn btn-success'}
   %table
     %thead
       %tr
@@ -12,8 +12,8 @@
         %tr
           %td= team_member.role
           %td= team_member.team_id
-          %td= team_member.user_id
-          %td= link_to 'Show', team_member
-          %td= link_to 'Edit', edit_team_member_path(team_member)
-          %td= link_to 'Destroy', team_member, method: :delete, data: { confirm: 'Are you sure?' }
+          %td= User.find(team_member.user_id).nick
+          -# %td= link_to 'Show', team_member
+          -# %td= link_to 'Edit', edit_team_member_path(team_member)
+          -# %td= link_to 'Destroy', team_member, method: :delete, data: { confirm: 'Are you sure?' }
   %br/

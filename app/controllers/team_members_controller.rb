@@ -1,10 +1,10 @@
 class TeamMembersController < ApplicationController
-  before_action :set_team_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_team_member, only: [:show, :edit, :update, :destroy, :create]
 
   # GET /team_members
   # GET /team_members.json
   def index
-    @team_members = TeamMember.all
+    @team_members = TeamMember.where(team_id: params[:team_id])
   end
 
   # GET /team_members/1
@@ -25,6 +25,7 @@ class TeamMembersController < ApplicationController
   # POST /team_members.json
   def create
     @team_member = TeamMember.new(team_member_params)
+    @team_member.user_id = current_user.id
 
     respond_to do |format|
       if @team_member.save
@@ -64,7 +65,7 @@ class TeamMembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team_member
-      @team_member = TeamMember.find(params[:id])
+      @team_member = TeamMember.find_by(params[:team_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

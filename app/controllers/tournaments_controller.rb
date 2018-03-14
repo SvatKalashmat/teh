@@ -28,8 +28,8 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
-        format.json { render :show, status: :created, location: @tournament }
+        format.html { redirect_to tournaments_path, notice: 'Tournament was successfully created.' }
+        format.json { render :index, status: :created, location: @tournament }
       else
         format.html { render :new }
         format.json { render json: @tournament.errors, status: :unprocessable_entity }
@@ -58,6 +58,7 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tournaments_url, notice: 'Tournament was successfully destroyed.' }
       format.json { head :no_content }
+      format.js   { render :layout => false}
     end
   end
 

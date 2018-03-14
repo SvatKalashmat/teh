@@ -4,7 +4,8 @@ class TeamMember < ApplicationRecord
   belongs_to :user
   belongs_to :team
 
-  enum role: [:user, :admin]
+  validates_uniqueness_of :user, scope: :team, presence: true
 
+  enum role: [:member, :owner]
 
 end

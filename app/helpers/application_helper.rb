@@ -1,13 +1,16 @@
 module ApplicationHelper
-  ALERT_TYPES = [:danger, :info, :success, :warning].freeze
+
+  ALERT_TYPES = [:danger, :success, :warning].freeze
 
   def flash_message
+
     flash_messages = []
+
       flash.each do |type, message|
         next if message.blank?
 
         type = :success if type == 'notice'
-        type = :danger  if type == 'alert'
+        type = :warning  if type == 'alert'
         type = :danger  if type == 'error'
 
         next unless ALERT_TYPES.include?(type)
