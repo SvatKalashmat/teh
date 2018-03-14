@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Role:
+  = @team_member.role
+%p
+  %strong Team:
+  = @team_member.team_id
+%p
+  %strong User:
+  = @team_member.user_id
+= link_to 'Edit', edit_team_member_path(@team_member)
+|
+= link_to 'Back', team_members_path

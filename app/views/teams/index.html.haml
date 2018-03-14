@@ -1,0 +1,21 @@
+%p#notice= notice
+.container
+  %h2 Teams #{link_to 'New Team', new_team_path, class: 'btn btn-success' if user_signed_in?}
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Avatar
+        %th Name
+        %th Created_at
+        %th Owner
+    %tbody
+      %tbody
+        - @teams.each do |team|
+          %tr
+            %td Тут будет аватар
+            %td= team.name
+            %td= team.created_at
+            %td Тут будет создатель
+            %td= link_to 'Show', team_team_members_path(team_id: team, user_id: current_user.id)
+            %td= link_to 'Edit', edit_team_path(team)
+            %td= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Team:
+  = @tournament_member.team_id
+%p
+  %strong Tournament:
+  = @tournament_member.tournament_id
+= link_to 'Edit', edit_tournament_member_path(@tournament_member)
+|
+= link_to 'Back', tournament_members_path
