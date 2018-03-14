@@ -15,7 +15,6 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
-    @team.team_members.build
   end
 
   # GET /teams/1/edit
@@ -27,6 +26,8 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @team.team_members.build(user_id: current_user.id, role: TeamMember.roles[:owner])
+    @team.owner = current_user
+
     respond_to do |format|
       if @team.save
         format.html { redirect_to teams_path, notice: 'Team was successfully created.' }
@@ -57,13 +58,14 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to teams_path, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
     def set_team
       @team = Team.find(params[:id])
     end

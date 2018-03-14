@@ -1,5 +1,5 @@
 class TeamMembersController < ApplicationController
-  before_action :set_team_member, only: [:show, :edit, :update, :destroy, :create]
+  before_action :set_team_member, only: [:show, :edit, :update, :destroy]
 
   # GET /team_members
   # GET /team_members.json
@@ -29,10 +29,10 @@ class TeamMembersController < ApplicationController
 
     respond_to do |format|
       if @team_member.save
-        format.html { redirect_to @team_member, notice: 'Team member was successfully created.' }
-        format.json { render :show, status: :created, location: @team_member }
+        format.html { redirect_to team_team_members_path, notice: 'Team member was successfully created.' }
+        format.json { render :index, status: :created, location: @team_member }
       else
-        format.html { render :new }
+        format.html { redirect_to team_team_members_path, alert: 'User already exist' }
         format.json { render json: @team_member.errors, status: :unprocessable_entity }
       end
     end
@@ -65,11 +65,11 @@ class TeamMembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team_member
-      @team_member = TeamMember.find_by(params[:team_id])
+      @team_member = TeamMember.find_by(team_id: params[:team_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_member_params
-      params.require(:team_member).permit(:role, :team_id, :user_id)
+      params.permit(:role, :team_id, :user_id)
     end
 end

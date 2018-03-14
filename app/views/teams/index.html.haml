@@ -1,5 +1,8 @@
 .container
-  %h2 Teams #{link_to 'New Team', new_team_path, class: 'btn btn-success' if user_signed_in?}
+  %h2 Teams
+  -if user_signed_in?
+    = link_to 'New Team', new_team_path, class: 'btn btn-success'
+
   %table.table.table-hover
     %thead
       %tr
@@ -16,9 +19,11 @@
             %td= image_tag team.image.url(:thumb_200), class:'img_value' if team.image?
             %td= team.name
             %td= I18n.localize team.created_at, format: :my_time
-            %td= team.team_members.owner.first.user.nick
+            %td= team.owner.nick
             %td= link_to 'Members', team_team_members_path(team), class: 'btn btn-warning', team: team
-            -if user_signed_in? && team.team_members.owner.first.user.id == current_user.id
+            -if user_signed_in? && team.owner == current_user
               %td
                 = link_to 'Edit', edit_team_path(team), class: 'btn btn-primary'
                 = link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+
+%p= owner_asd

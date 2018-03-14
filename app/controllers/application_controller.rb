@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :create]
+  before_action :authenticate_user!, except: [:index]
 
   helper ApplicationHelper
 

@@ -69,6 +69,6 @@ class TournamentMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_member_params
-      params.require(:tournament_member).permit(:team_id, :tournament_id)
+      params.permit(:team_id, :tournament_id)
     end
 end
