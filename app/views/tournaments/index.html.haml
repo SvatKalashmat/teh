@@ -13,13 +13,18 @@
         - @tournaments.each do |tournament|
           %tr
             %td= tournament.name
-            %td зареганые участники
+            %td= tournament.tournament_members.count
             %td= link_to 'Participants', tournament_tournament_members_path(tournament), class: 'btn btn-warning'
             %td
               -if user_signed_in?
-                = link_to 'СобытиеСобытиеСобытиеСобытие', tournament_tournament_members_path(tournament), action: :create, method: :post, class: 'btn btn-success'
+                = link_to 'Register', tournament_tournament_members_path(tournament_id: tournament.id, team_id: Team.find_by(owner: current_user)), action: :create, method: :post, class: 'btn btn-success'
+              -else
+                = link_to 'Leave', tournament_tournament_member_path(id: TournamentMember.find_by(tournament_id: tournament.id).id, tournament_id: tournament.id), method: :delete, class: 'btn btn-success'
             %td
               -if user_signed_in?
                 = link_to 'Edit', edit_tournament_path(tournament), class: 'btn btn-primary'
-                = link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger delete_staff',
-                :remote => true
+                = link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+          %p= tournament.tournament_members.inspect
+          -# %p= TournamentMember.find_by(tournament_id: tournament.id, team_id: Team.find_by(owner: current_user)).id
+
+%p= Team.find_by(owner: current_user).inspect

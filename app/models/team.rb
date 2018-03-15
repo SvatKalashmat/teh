@@ -9,4 +9,6 @@ class Team < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  # scope :owner, -> { where(Team.find_by(owner: current_user)) }
+
 end

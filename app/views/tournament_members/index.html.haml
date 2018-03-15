@@ -10,7 +10,7 @@
     %tbody
       - @tournament_members.each do |tournament_member|
         %tr
-          %td тут будет авка
-          %td название команды
-          %td ник капитана
-          %td дата регистрации
+          %td= image_tag tournament_member.team.image.url(:thumb_200), class:'img_value' if tournament_member.team.image?
+          %td= tournament_member.team.name
+          %td= tournament_member.team.owner.inspect
+          %td= I18n.localize tournament_member.team.created_at, format: :my_time

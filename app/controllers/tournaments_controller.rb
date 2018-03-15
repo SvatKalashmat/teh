@@ -58,7 +58,6 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tournaments_url, notice: 'Tournament was successfully destroyed.' }
       format.json { head :no_content }
-      format.js   { render :layout => false}
     end
   end
 
@@ -70,6 +69,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name)
+      params.require(:tournament).permit(:name, :team_id, :tournament_id)
     end
 end

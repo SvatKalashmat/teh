@@ -1,5 +1,5 @@
 class TeamMembersController < ApplicationController
-  before_action :set_team_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_team_member, only: [:show, :edit, :update]
 
   # GET /team_members
   # GET /team_members.json
@@ -29,7 +29,7 @@ class TeamMembersController < ApplicationController
 
     respond_to do |format|
       if @team_member.save
-        format.html { redirect_to team_team_members_path, notice: 'Team member was successfully created.' }
+        format.html { redirect_to team_team_members_path, notice: 'You joined the team' }
         format.json { render :index, status: :created, location: @team_member }
       else
         format.html { redirect_to team_team_members_path, alert: 'User already exist' }
@@ -55,9 +55,10 @@ class TeamMembersController < ApplicationController
   # DELETE /team_members/1
   # DELETE /team_members/1.json
   def destroy
-    @team_member.destroy
+    team_member = TeamMember.find_by(team_id: params[:team_id], user_id: params[:id])
+    team_member.destroy
     respond_to do |format|
-      format.html { redirect_to team_members_url, notice: 'Team member was successfully destroyed.' }
+      format.html { redirect_to team_team_members_path, notice: 'You leave the team' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +71,6 @@ class TeamMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_member_params
-      params.permit(:role, :team_id, :user_id)
+      params.permit(:role, :team_id, :user_id, :id)
     end
 end

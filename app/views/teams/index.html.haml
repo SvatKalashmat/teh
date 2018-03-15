@@ -1,7 +1,7 @@
 .container
   %h2 Teams
   -if user_signed_in?
-    = link_to 'New Team', new_team_path, class: 'btn btn-success'
+    = link_to 'New Team', new_team_path, class: 'btn btn-success' unless @teams.any? {|team| team.owner == current_user}
 
   %table.table.table-hover
     %thead
@@ -10,6 +10,7 @@
         %th Name
         %th Created_at
         %th Owner
+        %th Players
         %th About Team
         %th Menu
     %tbody
@@ -20,10 +21,9 @@
             %td= team.name
             %td= I18n.localize team.created_at, format: :my_time
             %td= team.owner.nick
+            %td= team.team_members.count
             %td= link_to 'Members', team_team_members_path(team), class: 'btn btn-warning', team: team
             -if user_signed_in? && team.owner == current_user
               %td
                 = link_to 'Edit', edit_team_path(team), class: 'btn btn-primary'
                 = link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-
-%p= owner_asd

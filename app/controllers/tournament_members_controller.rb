@@ -1,5 +1,5 @@
 class TournamentMembersController < ApplicationController
-  before_action :set_tournament_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_tournament_member, only: [:show, :edit, :update]
 
   # GET /tournament_members
   # GET /tournament_members.json
@@ -25,13 +25,12 @@ class TournamentMembersController < ApplicationController
   # POST /tournament_members.json
   def create
     @tournament_member = TournamentMember.new(tournament_member_params)
-
     respond_to do |format|
       if @tournament_member.save
-        format.html { redirect_to @tournament_member, notice: 'Tournament member was successfully created.' }
+        format.html { redirect_to tournaments_path, notice: 'Tournament member was successfully created.' }
         format.json { render :show, status: :created, location: @tournament_member }
       else
-        format.html { render :new }
+        format.html { redirect_to tournaments_path, alert: 'Already exist' }
         format.json { render json: @tournament_member.errors, status: :unprocessable_entity }
       end
     end
@@ -54,9 +53,10 @@ class TournamentMembersController < ApplicationController
   # DELETE /tournament_members/1
   # DELETE /tournament_members/1.json
   def destroy
-    @tournament_member.destroy
+    tournament_member = TournamentMember.find_by(id: params[:id], tournament_id: params[:tournament_id])
+    tournament_member.destroy
     respond_to do |format|
-      format.html { redirect_to tournament_members_url, notice: 'Tournament member was successfully destroyed.' }
+      format.html { redirect_to tournaments_path, notice: 'Tournament member was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class TournamentMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_member_params
-      params.permit(:team_id, :tournament_id)
+      params.permit(:team_id, :tournament_id, :id)
     end
 end
